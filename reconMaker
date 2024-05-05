@@ -1,0 +1,20 @@
+#!/bin/bash
+
+wildcards=$(cat wildcards)
+
+mkdir assetfinder
+mkdir subfinder
+cd assetfinder
+for x in $wildcards;
+do
+	assetfinder -subs-only $x | tee -a domains
+done
+cat domains | httprobe | tee -a hosts
+meg -d 1000 -v /
+cd ../subfinder
+for x in $wildcards;
+do
+	subfinder -d $x | tee -a domains
+done
+cat domains | httpx -title -wc -sc -cl -ct -web-server -p 443,80,8080,8443 -threads 75 -location| tee -a hosts
+
