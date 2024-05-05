@@ -1,5 +1,5 @@
 TOOLS YOU NEED:
-  \nAssetfinder
+  Assetfinder
   Htttprobe
   Meg
   Subfinder
